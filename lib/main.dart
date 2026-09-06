@@ -51,6 +51,20 @@ class MainScreen extends StatelessWidget{
         ),
       ),
       body: HomeScreen(),
+      bottomNavigationBar: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        children: [
+          IconButton(onPressed: (){}, icon: Icon(Icons.home,color: Colors.white,size: 30,),),
+          SizedBox(width: 10,),
+          IconButton(onPressed: (){}, icon: Icon(Icons.search,color: Colors.white,size: 30,)),
+          SizedBox(width: 10,),
+          IconButton(onPressed: (){}, icon: Icon(Icons.add,color: Colors.white,size: 30,)),
+          SizedBox(width: 10,),
+          IconButton(onPressed: (){}, icon: Icon(Icons.book,color: Colors.white,size: 30,)),
+          SizedBox(width: 10,),
+          IconButton(onPressed: (){}, icon: Icon(Icons.circle,color: Colors.white,size: 30,))
+        ],
+      ),
     );
   }
 }
