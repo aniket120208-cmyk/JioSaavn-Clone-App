@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:jiosaavn_app/screens/home_screen.dart';
+import 'package:jiosaavn_app/screens/search_screen.dart';
 
 final theme = ThemeData(
   useMaterial3: true,
@@ -31,10 +32,60 @@ void main(){
  );
 }
 
-class MainScreen extends StatelessWidget{
+class MainScreen extends StatefulWidget{
   const MainScreen({super.key});
+
+  @override
+  State<MainScreen> createState() => _MainScreenState();
+}
+
+class _MainScreenState extends State<MainScreen> {
+  int _pageIndex = 0;
+  void active(int index){
+    setState(() {
+      _pageIndex = index;
+    });
+  }
   @override
   Widget build(BuildContext context) {
+    void create(){
+    showModalBottomSheet(
+    context: context,
+    builder: (context) {
+    return SizedBox(
+      height: 550,
+      width: 600,
+      child: 
+      Padding(padding: EdgeInsetsGeometry.only(left: 10,top: 2),
+      child: 
+      Column(children: [
+        SizedBox(height: 8,),
+      Row(
+        children: [
+          Text('Create New Playlist',style: TextStyle(fontSize: 18,fontWeight: FontWeight.bold),),
+          SizedBox(width: 125,),
+          IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.close)),
+        ],
+      ),],),
+      ),
+    );
+  },
+);
+    }
+    Widget activeScreen;
+    if(_pageIndex == 0){
+        activeScreen = HomeScreen();
+    }else if(_pageIndex == 1){
+        activeScreen = SearchScreen();
+    }
+    else if(_pageIndex == 3){
+      activeScreen = HomeScreen();
+    }
+    else if(_pageIndex == 4){
+      activeScreen = HomeScreen();
+    }else{
+      activeScreen = HomeScreen();
+    }
     return Scaffold(
       appBar: 
       AppBar(
@@ -50,21 +101,18 @@ class MainScreen extends StatelessWidget{
           ],
         ),
       ),
-      body: HomeScreen(),
-      bottomNavigationBar: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-        children: [
-          IconButton(onPressed: (){}, icon: Icon(Icons.home,color: Colors.white,size: 30,),),
-          SizedBox(width: 10,),
-          IconButton(onPressed: (){}, icon: Icon(Icons.search,color: Colors.white,size: 30,)),
-          SizedBox(width: 10,),
-          IconButton(onPressed: (){}, icon: Icon(Icons.add,color: Colors.white,size: 30,)),
-          SizedBox(width: 10,),
-          IconButton(onPressed: (){}, icon: Icon(Icons.book,color: Colors.white,size: 30,)),
-          SizedBox(width: 10,),
-          IconButton(onPressed: (){}, icon: Icon(Icons.circle,color: Colors.white,size: 30,))
-        ],
-      ),
+      body: activeScreen, 
+      bottomNavigationBar: BottomNavigationBar(
+        onTap: active,
+        currentIndex: _pageIndex,
+        selectedItemColor: Colors.white,
+        unselectedItemColor: Colors.white,
+        items:[BottomNavigationBarItem(icon: Icon(Icons.home,color: Colors.white,),label: 'Home'),
+              BottomNavigationBarItem(icon: Icon(Icons.search,color: Colors.white,),label: 'Search'),
+              BottomNavigationBarItem(icon: IconButton(onPressed: create, icon: Icon(Icons.add)),label: 'Create'),
+              BottomNavigationBarItem(icon: Icon(Icons.book,color: Colors.white,),label: 'Library'),
+              BottomNavigationBarItem(icon: Icon(Icons.circle,color: Colors.white,),label: 'Pro')] 
+        ),
     );
   }
 }
