@@ -9,9 +9,7 @@ class HomeScreen extends StatelessWidget{
     SingleChildScrollView(child: 
     Column(
       children: [
-        SingleChildScrollView(
-          scrollDirection: Axis.horizontal,
-          child: Column(children: [
+        
         
             Padding(padding: EdgeInsetsGeometry.only(left: 5),
             child:
@@ -35,6 +33,9 @@ class HomeScreen extends StatelessWidget{
           children: [
           Text('Your Usuals',style: TextStyle(color: Colors.white,fontSize: 20,fontWeight: FontWeight.bold),),],),),
           SizedBox(height: 15,),
+          SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Column(children: [
           Padding(padding: EdgeInsetsGeometry.only(left: 10,right: 10),
           child: 
           Row(
