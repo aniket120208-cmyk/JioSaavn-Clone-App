@@ -51,13 +51,18 @@ class _MainScreenState extends State<MainScreen> {
     void create(){
     showModalBottomSheet(
     context: context,
+    isScrollControlled: true,
     builder: (context) {
-    return SizedBox(
+    return Container(
       height: 550,
       width: 600,
+      decoration: BoxDecoration(
+        color: const Color.fromARGB(44, 0, 0, 0)
+      ),
       child: 
-      Padding(padding: EdgeInsetsGeometry.only(left: 10,top: 2),
+      Padding(padding: EdgeInsetsGeometry.only(left: 10,top: 2,bottom: MediaQuery.of(context).viewInsets.bottom,),
       child: 
+      SingleChildScrollView(child: 
       Column(children: [
         SizedBox(height: 8,),
       Row(
@@ -66,8 +71,40 @@ class _MainScreenState extends State<MainScreen> {
           SizedBox(width: 125,),
           IconButton(onPressed: (){Navigator.pop(context);}, icon: Icon(Icons.close)),
         ],
-      ),],),
       ),
+      Padding(padding: EdgeInsetsGeometry.all(15),
+      child: Column(
+      children: [
+      Padding(padding: EdgeInsetsGeometry.only(left: 5),
+      child: 
+      Text('Name',style: TextStyle(color: const Color.fromARGB(117, 255, 255, 255))),),
+      TextField(
+        maxLength: 80,
+      ),
+      Padding(padding: EdgeInsetsGeometry.only(left: 5),
+      child: 
+      Text('Give your playlist an interesting name', style: TextStyle(color: const Color.fromARGB(117, 255, 255, 255)),),),
+      SizedBox(height: 8,),
+      Text('Description(Optional)', style: TextStyle(color: const Color.fromARGB(117, 255, 255, 255))),
+      TextField(
+        maxLength: 100,
+        decoration: InputDecoration(label: Text('Max 100 characters',style: TextStyle(color: const Color.fromARGB(117, 255, 255, 255)))),
+      ),
+      Row(children: [
+      Checkbox(value: true, onChanged: (value) => false , fillColor: WidgetStatePropertyAll(Colors.greenAccent),),
+      Text('Playlist will be visible to everyone',style: TextStyle(color: const Color.fromARGB(117, 255, 255, 255)),),]),
+      SizedBox(height: 8,),
+      OutlinedButton(onPressed: (){},
+       style: OutlinedButton.styleFrom(
+          backgroundColor: const Color.fromARGB(60, 18, 4, 4),
+          shape: RoundedRectangleBorder(borderRadius: BorderRadiusGeometry.circular(5)),
+          
+      ),
+      child: Text('    Create Playlist    ',
+        style: TextStyle(color: const Color.fromARGB(117, 255, 255, 255))),),
+      ],),
+      ),
+      ],),),),
     );
   },
 );
